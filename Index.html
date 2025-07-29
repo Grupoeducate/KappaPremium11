@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planes de Mejoramiento - Kappa premium 11</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --color-matematicas: #FA8349;
+      --color-lenguaje: #FFAF10;
+      --color-naturales: #38B849;
+      --color-sociales: #3F7ABE;
+      --color-ingles: #825EA8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f7fa;
+      color: #17334B;
+      padding-bottom: 2rem;
+    }
+
+    header {
+      text-align: center;
+      padding: 0.5rem 0.5rem;
+      background-color: #17334B;
+    }
+
+    .logo-container img {
+      width: 100%;
+      max-width: 240px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 1rem 0;
+      color: white;
+    }
+
+    .logo-banner img {
+      width: 100%;
+      max-width: 700px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .intro-box {
+      max-width: 950px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+
+    .intro-box h2 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      color: #17334B;
+    }
+
+    .intro-box p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .intro-box strong {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro-box ol {
+      padding-left: 1.2rem;
+    }
+
+    .intro-box li {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .intro-box li:nth-child(1)::marker { color: var(--color-matematicas); }
+    .intro-box li:nth-child(2)::marker { color: var(--color-lenguaje); }
+    .intro-box li:nth-child(3)::marker { color: var(--color-naturales); }
+    .intro-box li:nth-child(4)::marker { color: var(--color-sociales); }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto 2rem auto;
+    }
+
+    .area-card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .area-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .area-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      z-index: 0;
+      animation: rotate-border 2s linear infinite;
+      opacity: 0;
+    }
+
+    .area-card:hover::before {
+      opacity: 1;
+    }
+
+    .area-card[data-area="matematicas"] {
+      border-color: var(--color-matematicas);
+    }
+    .area-card[data-area="matematicas"]::before {
+      border-color: var(--color-matematicas);
+    }
+    .area-card[data-area="lenguaje"] {
+      border-color: var(--color-lenguaje);
+    }
+    .area-card[data-area="lenguaje"]::before {
+      border-color: var(--color-lenguaje);
+    }
+    .area-card[data-area="naturales"] {
+      border-color: var(--color-naturales);
+    }
+    .area-card[data-area="naturales"]::before {
+      border-color: var(--color-naturales);
+    }
+    .area-card[data-area="sociales"] {
+      border-color: var(--color-sociales);
+    }
+    .area-card[data-area="sociales"]::before {
+      border-color: var(--color-sociales);
+    }
+    .area-card[data-area="ingles"] {
+      border-color: var(--color-ingles);
+    }
+    .area-card[data-area="ingles"]::before {
+      border-color: var(--color-ingles);
+    }
+
+    @keyframes rotate-border {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .area-card img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .area-card h3 {
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .components-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 1.2rem;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: none;
+    }
+
+    .components-container.active {
+      display: block;
+    }
+
+    .component-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 0.3rem 0.2rem;
+    }
+
+    .component-item span {
+      font-size: 1rem;
+    }
+
+    .btn-acceso {
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-acceso:hover {
+      transform: scale(1.08);
+      animation: pulse 0.8s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 1rem;
+      text-align: center;
+      background: #17334B;
+      color: white;
+    }
+
+    footer img {
+      width: 100%;
+      max-width: 200px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    @media screen and (max-width: 500px) {
+      .component-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/Grupoeducate/Master11/refs/heads/main/GRUPOEDUCATE.png" alt="Grupo Educate Colombia">
+  </div>
+  <h1>¡Bienvenido al portal de Planes de Mejoramiento!</h1>
+</header>
+<div class="logo-banner">
+  <img src="https://github.com/Grupoeducate/Epsilon11/blob/main/Logo%20Epsilon.png?raw=true" alt="Master Elite 11">
+</div>
+<div class="intro-box">
+  <p>Este espacio digital te ofrece un acceso directo a recursos educativos, diseñados meticulosamente para reforzar tus conocimientos y optimizar tu desempeño académico. <b>Nuestra misión </b> es acompañarte en tu trayectoria educativa, transformando cada desafío en una valiosa oportunidad de crecimiento. <br><br> Para comprender cómo te beneficiaremos, es fundamental entender: </p>
+  <h2>¿Qué es un Plan de Mejoramiento?</h2>
+  <p>Un Plan de Mejoramiento es una estrategia de acompañamiento pedagógico, diseñada para que trabajes de forma autónoma en aquellos componentes o áreas que presenten mayor dificultad. Serás guiado(a) paso a paso, utilizando material estructurado y de alta calidad que te permitirá consolidar tus bases y profundizar en conceptos clave. Es tu aliado estratégico para superar obstáculos y alcanzar tus metas académicas con confianza. </p>
+  <strong>✅ ¿Cómo puedes ver las actividades de los planes de mejoramiento?</strong>
+  <ol>
+    <li>Selecciona un área del conocimiento.</li>
+    <li>Haz clic sobre su tarjeta.</li>
+    <li>Selecciona el componente que quieres observar.</li>
+    <li>Ingresa al recurso o guía correspondiente dando clic en el botón “Ingresar”.</li>
+  </ol>
+</div>
+<!-- TARJETAS DE ÁREAS -->
+<div class="areas-grid">
+  <div class="area-card" data-area="matematicas">
+    <img src="https://cdn-icons-png.flaticon.com/512/1048/1048928.png" alt="Matemáticas">
+    <h3>Matemáticas</h3>
+  </div>
+  <div class="area-card" data-area="lenguaje">
+    <img src="https://cdn-icons-png.flaticon.com/512/3145/3145765.png" alt="Lectura Crítica">
+    <h3>Lectura Crítica</h3>
+  </div>
+  <div class="area-card" data-area="naturales">
+    <img src="https://cdn-icons-png.flaticon.com/512/2759/2759168.png" alt="Ciencias Naturales">
+    <h3>Ciencias Naturales</h3>
+  </div>
+  <div class="area-card" data-area="sociales">
+    <img src="https://cdn-icons-png.flaticon.com/512/174/174249.png" alt="Ciencias Sociales">
+    <h3>Ciencias Sociales</h3>
+  </div>
+  <div class="area-card" data-area="ingles">
+    <img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" alt="Inglés">
+    <h3>Inglés</h3>
+  </div>
+</div>
+<!-- CONTENEDOR DE COMPONENTES -->
+<div id="components" class="components-container"></div>
+<footer>
+  <img src="https://raw.githubusercontent.com/Grupoeducate/Master11/refs/heads/main/GRUPOEDUCATE.png" alt="Grupo Educate Colombia">
+  <H2>¡Tu camino al éxito académico!</H2>
+  <p>&copy; 2025 Grupo Educate Colombia. Todos los derechos reservados.</p>
+</footer>
+<script>
+  const areaCards = document.querySelectorAll('.area-card');
+  const componentsContainer = document.getElementById('components');
+
+  const componentes = {
+    matematicas: [
+      { nombre: 'Numérico - Variacional', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Mat-Num.pdf&embedded=true', color: '--color-matematicas' },
+      { nombre: 'Geométrico - Métrico', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Mat-Geo.pdf&embedded=true', color: '--color-matematicas' },
+      { nombre: 'Aleatorio', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Mat-Ale.pdf&embedded=true', color: '--color-matematicas' }
+    ],
+    lenguaje: [
+      { nombre: 'Semántico', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Lec-Sem.pdf&embedded=true', color: '--color-lenguaje' },
+      { nombre: 'Sintáctico', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Lec-Sin.pdf&embedded=true', color: '--color-lenguaje' },
+      { nombre: 'Pragmático', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Lec-Prag.pdf&embedded=true', color: '--color-lenguaje' }
+    ],
+    naturales: [
+      { nombre: 'Entorno Biológico', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Nat-Bio.pdf&embedded=true', color: '--color-naturales' },
+      { nombre: 'Entorno Químico', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Nat-Qui.pdf&embedded=true', color: '--color-naturales' },
+      { nombre: 'Entorno Físico', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Nat-Fis.pdf&embedded=true', color: '--color-naturales' },
+      { nombre: 'Ciencia, Tecnología y Sociedad (CTS)', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Nat-Cts.pdf&embedded=true', color: '--color-naturales' }
+    ],
+    sociales: [
+      { nombre: 'Ciencias Sociales', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Soc-Soc.pdf&embedded=true', color: '--color-sociales' },
+      { nombre: 'Competencias Ciudadanas', link: 'https://docs.google.com/gview?url=https://raw.githubusercontent.com/Grupoeducate/Epsilon11/main/PM-Epsilon%2011-Soc-comp.pdf&embedded=true', color: '--color-sociales' }
+    ],
+    ingles: [
+      { nombre: 'Trabajemos desde la Parte 1 hasta la Parte 7', link: '', color: '--color-ingles' }
+    ]
+  };
+
+  areaCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const area = card.getAttribute('data-area');
+      const items = componentes[area];
+
+      if (!items) return;
+      let html = `<h3 style="margin-bottom:1rem">Componentes del área de ${card.textContent}</h3>`;
+      items.forEach(comp => {
+        const color = getComputedStyle(document.documentElement).getPropertyValue(comp.color);
+        // --- ESTA ES LA LÍNEA MODIFICADA ---
+        const link = comp.link;
+        html += `
+          <div class="component-item">
+            <span>${comp.nombre}</span>
+            <a href="${link}" class="btn-acceso" target="_blank" style="background:${color}">Ingresar</a>
+          </div>`;
+      });
+      componentsContainer.innerHTML = html;
+      componentsContainer.classList.add('active');
+      componentsContainer.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
